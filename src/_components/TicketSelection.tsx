@@ -12,7 +12,7 @@ const TicketSelection = () => {
       <TicketType />
 
       <div className="space-y-2">
-        <div className="flex flex-col gap-y-2 max-md:mb-4 md:flex-row">
+        <div className="mb-4 flex flex-col gap-y-2">
           <label>Number of Tickets</label>
           <select className="border-border ml-2 cursor-pointer rounded-md border p-3 px-2">
             {options.map((value) => (
@@ -22,7 +22,7 @@ const TicketSelection = () => {
             ))}
           </select>
         </div>
-        <div className="border-border flex w-full flex-col gap-x-12 gap-y-3 md:h-12 md:flex-row md:justify-between md:rounded-full md:border md:px-12">
+        <div className="flex h-12 flex-col justify-between gap-x-6 gap-y-3 max-md:flex-col-reverse md:flex-row">
           <button className="hover:bg-primary flex-1 rounded-xl border border-[#24A0B5] text-[#24A0B5] transition-all duration-300 max-md:p-3">
             Cancel
           </button>

@@ -65,6 +65,7 @@ const AttendeeDetails = () => {
           <label htmlFor="project">About the project</label>
           <textarea
             name="project"
+            placeholder="Textarea"
             id="project"
             className="border-border h-[127px] rounded-md border px-2 py-1"
           ></textarea>

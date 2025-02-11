@@ -36,7 +36,7 @@ function App() {
     );
   };
   return (
-    <div className="from-primary to-secondary min-h-dvh space-y-10 bg-linear-to-b px-2 py-2 text-white md:px-5 md:py-5">
+    <div className="from-primary to-secondary min-h-dvh space-y-10 bg-linear-to-b px-3 py-2 text-white md:px-5 md:py-5">
       <NavHeader />
       {tabs.map(
         (tab) =>

@@ -36,22 +36,20 @@ const TicketType: React.FC<Props> = ({ name }) => {
   return (
     <div className="border-border space-y-4 rounded-2xl border p-4">
       <span>Select Ticket Type: {name}</span>
-      <ul className="mt-4 grid gap-4 md:grid-cols-2">
+      <ul className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-3">
         {ticketTypes.map((ticket) => (
           <li
             key={ticket.name}
-            className={`border-border flex cursor-pointer flex-row justify-between gap-x-2 rounded-xl border p-2 transition-all duration-200 hover:bg-[#197686] ${ticket.name === selectedTicket && "bg-[#197686]"}`}
+            className={`border-border flex cursor-pointer flex-col justify-between gap-x-2 rounded-xl border p-2 transition-all duration-200 hover:bg-[#197686] ${ticket.name === selectedTicket && "bg-[#197686]"}`}
             onClick={() => handleSelectTicket(ticket.name)}
           >
+            <button className={`h-[38px] text-start text-xl font-semibold`}>
+              {`${ticket.amount ? "$" + ticket.amount : "Free"}`}
+            </button>
             <div className="flex flex-col gap-y-2">
               <span className="uppercase">{ticket.name}</span>
               <span className="text-[14px]">{ticket.capacity} left!</span>
             </div>
-            <button
-              className={`p- h-[38px] w-20 rounded-md border border-[#2ba4b9] pr-2 text-end text-xl font-semibold ${ticket.name === selectedTicket ? "bg-[#0E464F]" : "bg-[#0E464F]/40"}`}
-            >
-              {`${ticket.amount ? "$" + ticket.amount : "Free"}`}
-            </button>
           </li>
         ))}
       </ul>

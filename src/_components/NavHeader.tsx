@@ -1,6 +1,6 @@
 const NavHeader = () => {
   return (
-    <nav className="mx-auto flex h-[76px] max-w-[1200px] flex-row items-center justify-between rounded-2xl border border-[#197686] bg-[#05252C]/40 px-4">
+    <nav className="sticky top-5 z-20 mx-auto flex h-[76px] max-w-[1200px] flex-row items-center justify-between rounded-2xl border border-[#197686] bg-[#05252C]/40 px-4 backdrop-blur-sm">
       <div>
         <img
           src="/logo.svg"
