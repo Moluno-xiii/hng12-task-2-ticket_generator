@@ -1,35 +1,56 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import NavHeader from "./_components/NavHeader";
+import Tab from "./_components/Tab";
+import TicketSelection from "./_components/TicketSelection";
+import AttendeeDetails from "./_components/AttendeeDetails";
+import Ready from "./_components/Ready";
 
+interface TabsTypes {
+  title: string;
+  number: number;
+  element: React.ReactElement;
+}
+const tabs: TabsTypes[] = [
+  {
+    title: "ticket selection",
+    number: 1,
+    element: <TicketSelection />,
+  },
+  {
+    title: "attendee details",
+    number: 2,
+    element: <AttendeeDetails />,
+  },
+  {
+    title: "ready",
+    number: 3,
+    element: <Ready />,
+  },
+];
 function App() {
-  const [count, setCount] = useState(0)
+  const [activeTab, setActiveTab] = useState(1);
 
+  const onNextTab = () => {
+    setActiveTab((activeTab) =>
+      activeTab > 2 ? activeTab - 2 : activeTab + 1,
+    );
+  };
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="from-primary to-secondary min-h-dvh space-y-10 bg-linear-to-b px-2 py-2 text-white md:px-5 md:py-5">
+      <NavHeader />
+      {tabs.map(
+        (tab) =>
+          activeTab === tab.number && (
+            <Tab tabNumber={activeTab} title={tab.title}>
+              {tab.element}
+            </Tab>
+          ),
+      )}
+      <button className="bg-primary rounded-xl p-3" onClick={onNextTab}>
+        next tab
+      </button>
+    </div>
+  );
 }
 
-export default App
+export default App;
