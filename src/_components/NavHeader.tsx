@@ -9,7 +9,7 @@ const NavHeader = () => {
         />
       </div>
 
-      <ul className="flex flex-row items-center gap-x-4 text-[18px]">
+      <ul className="hidden flex-row items-center gap-x-4 text-[18px] md:flex">
         <li className="cursor-pointer transition-all duration-200 hover:text-white/50">
           Events
         </li>

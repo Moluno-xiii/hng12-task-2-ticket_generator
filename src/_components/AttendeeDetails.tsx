@@ -16,7 +16,7 @@ const AttendeeDetails = () => {
     console.log(formData);
   };
   return (
-    <div className="border-border space-y-8 rounded-4xl border bg-[#08252B] md:p-8">
+    <div className="md:border-border md:ounded-4xl space-y-8 md:border md:bg-[#08252B] md:p-8">
       <form className="flex w-full flex-col gap-y-6" action={onSubmit}>
         <div className="flex flex-col gap-y-2">
           <label htmlFor="image">Select Image</label>
