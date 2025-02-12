@@ -1,14 +1,15 @@
-import { useState } from "react";
+// import { useState } from "react";
+import ImageUpload from "./ImageUpload";
 
 const AttendeeDetails = () => {
-  const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  // const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
-  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files[0]) {
-      const file = event.target.files[0];
-      setSelectedImage(file);
-    }
-  };
+  // const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   if (event.target.files && event.target.files[0]) {
+  //     const file = event.target.files[0];
+  //     setSelectedImage(file);
+  //   }
+  // };
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = (formData: any) => {
     // e.preventDefault();
@@ -18,7 +19,7 @@ const AttendeeDetails = () => {
   return (
     <div className="md:border-border md:ounded-4xl space-y-8 md:border md:bg-[#08252B] md:p-8">
       <form className="flex w-full flex-col gap-y-6" action={onSubmit}>
-        <div className="flex flex-col gap-y-2">
+        {/* <div className="flex flex-col gap-y-2">
           <label htmlFor="image">Select Image</label>
           <input
             type="file"
@@ -28,18 +29,16 @@ const AttendeeDetails = () => {
             onChange={handleImageChange}
             className="border-border rounded-md border p-3"
           />
-        </div>
-
-        {selectedImage && (
-          <div>
-            <p>Selected Image:</p>
-            <img
-              src={URL.createObjectURL(selectedImage)}
-              alt="Preview"
-              className="mt-2 h-32 w-32 object-cover"
-            />
+        </div> */}
+        <div className="border-border bg-primary/30 rounded-2xl border p-3">
+          <div className="relative flex flex-col items-center justify-center gap-y-2">
+            <label htmlFor="image" className="place-self-start">
+              Upload Profile Photo
+            </label>
+            <ImageUpload />
+            <div className="bg-primary absolute top-20 right-4 bottom-10 left-4"></div>
           </div>
-        )}
+        </div>
 
         <div className="bg-secondary h-1"></div>
 
@@ -53,12 +52,17 @@ const AttendeeDetails = () => {
           />
         </div>
 
-        <div className="flex flex-col gap-y-2">
+        <div className="relative flex flex-col gap-y-2">
           <label htmlFor="email">Enter your email</label>
           <input
             type="text"
-            className="border-border h-12 rounded-md border px-2"
+            className="border-border h-12 rounded-md border px-10"
             placeholder="hello@avioflagos.io"
+          />
+          <img
+            src="mail-icon.svg"
+            alt="mail icon"
+            className="absolute top-12 left-2"
           />
         </div>
         <div className="flex flex-col gap-y-2">
