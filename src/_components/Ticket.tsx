@@ -29,22 +29,27 @@ const TechemberTicket = () => {
               className="from-secondary via-primary relative space-y-6 rounded-2xl border border-[#24A0B5] bg-linear-150 to-[#24A0B5]/50 p-6"
             >
               <div className="flex flex-col items-center space-y-2 text-center">
-                <h1
-                  className="text-3xl font-bold tracking-wider text-white"
-                  style={{ fontFamily: "monospace" }}
-                >
+                <h1 className="font-rage text-3xl font-bold tracking-wider text-white">
                   Techember Fest '25
                 </h1>
-                <div className="space-y-1 text-gray-300">
-                  <p>📍 04 Rumens road, Ikoyi, Lagos</p>
-                  <p>🕐 March 15, 2025 | 7:00 PM</p>
+                <div
+                  className="space-y-1 text-gray-300"
+                  aria-labelledby="event details"
+                >
+                  <p aria-labelledby="event location">
+                    📍 04 Rumens road, Ikoyi, Lagos
+                  </p>
+                  <p aria-labelledby="event time">
+                    🕐 March 15, 2025 | 7:00 PM
+                  </p>
                 </div>
               </div>
 
               <div className="rounded-lg p-2">
                 <div className="relative aspect-square overflow-hidden rounded-lg">
                   <img
-                    src="/public/user-image.svg"
+                    aria-labelledby="user image"
+                    src="/user-image.svg"
                     alt="user image"
                     className="h-full w-full"
                   />
@@ -55,24 +60,30 @@ const TechemberTicket = () => {
                 <div className="grid grid-cols-2">
                   <div className="border-border border-r border-b p-2">
                     <span className="text-gray-500">Enter your name:</span>
-                    <p className="font-bold">Avi Chukwu</p>
+                    <p aria-labelledby="user's name" className="font-bold">
+                      Avi Chukwu
+                    </p>
                   </div>
                   <div className="border-border border-b p-2">
                     <span className="text-gray-500">Ticket for:</span>
-                    <p className="font-bold">User@email.com</p>
+                    <p aria-labelledby="user's email" className="font-bold">
+                      User@email.com
+                    </p>
                   </div>
                   <div className="border-border border-r border-b p-2">
                     <span className="text-gray-500">Ticket Type:</span>
-                    <p>VIP</p>
+                    <p aria-labelledby="ticket type">VIP</p>
                   </div>
                   <div className="border-border border-b p-2">
                     <span className="text-gray-500">Ticket for:</span>
-                    <p className="">1</p>
+                    <p aria-labelledby="number of tickets" className="">
+                      1
+                    </p>
                   </div>
                 </div>
                 <div className="p-2">
                   <span className="text-gray-500">Special request?</span>
-                  <p>
+                  <p aria-labelledby="user special request">
                     Nil? Or the users sad story they write in there gets this
                     whole space, Max of three rows.
                   </p>

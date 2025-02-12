@@ -1,15 +1,16 @@
-import { useState } from "react";
 import NavHeader from "./_components/NavHeader";
 import Tab from "./_components/Tab";
 import TicketSelection from "./_components/TicketSelection";
 import AttendeeDetails from "./_components/AttendeeDetails";
 import Ready from "./_components/Ready";
+import { useTabContext } from "./_contexts/TabContext";
 
 interface TabsTypes {
   title: string;
   number: number;
   element: React.ReactElement;
 }
+
 const tabs: TabsTypes[] = [
   {
     title: "ticket selection",
@@ -28,27 +29,16 @@ const tabs: TabsTypes[] = [
   },
 ];
 function App() {
-  const [activeTab, setActiveTab] = useState(1);
-
-  const onNextTab = () => {
-    setActiveTab((activeTab) =>
-      activeTab > 2 ? activeTab - 2 : activeTab + 1,
-    );
-  };
+  const { activeTab } = useTabContext();
   return (
     <div className="from-primary to-secondary min-h-dvh space-y-10 bg-linear-to-b px-3 py-2 text-white md:px-5 md:py-5">
       <NavHeader />
       {tabs.map(
         (tab) =>
           activeTab === tab.number && (
-            <Tab tabNumber={activeTab} title={tab.title}>
-              {tab.element}
-            </Tab>
+            <Tab title={tab.title}>{tab.element}</Tab>
           ),
       )}
-      <button className="bg-primary rounded-xl p-3" onClick={onNextTab}>
-        next tab
-      </button>
     </div>
   );
 }

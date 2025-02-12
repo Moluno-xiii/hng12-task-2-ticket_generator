@@ -43,6 +43,7 @@ const ImageUpload = () => {
         accept="image/*"
         className="hidden"
         onChange={handleChange}
+        aria-labelledby="image input"
       />
       {selectedImage ? (
         <img
