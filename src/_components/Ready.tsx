@@ -3,6 +3,22 @@ import TechemberTicket from "./Ticket";
 
 const Ready: React.FC = () => {
   const { onPreviousTab } = useTabContext();
+  const storedState = localStorage.getItem("formData");
+  const stateObj = storedState ? JSON.parse(storedState) : null;
+
+  if (stateObj.name.length <= 0)
+    return (
+      <div className="flex min-h-96 flex-col items-center justify-center gap-y-3">
+        You have no booked tickets yet.
+        <button
+          className="bg-secondary hover:bg-secondary/50 cursor-pointer rounded-3xl px-4 py-2 capitalize transition-all duration-200"
+          onClick={() => onPreviousTab(1)}
+        >
+          book a ticket
+        </button>
+      </div>
+    );
+
   return (
     <div
       className="flex flex-col items-center gap-y-6"

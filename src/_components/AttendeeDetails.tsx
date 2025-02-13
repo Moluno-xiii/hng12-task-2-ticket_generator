@@ -40,7 +40,7 @@ const AttendeeDetails = () => {
   };
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
-    console.log("Form Data:", data);
+    // console.log("Form Data:", data);
     localStorage.setItem("formData", JSON.stringify(data));
     onNextTab();
   };

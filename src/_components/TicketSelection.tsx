@@ -46,7 +46,7 @@ const TicketSelection = () => {
             Cancel
           </button>
           <button
-            onClick={onNextTab}
+            onClick={() => onNextTab(0)}
             aria-labelledby="next form button"
             className="w-full rounded-xl border border-[#24A0B5] bg-[#24A0B5] text-white transition-all duration-300 hover:bg-[#24A0B5]/70 max-md:p-3 md:flex-1"
           >

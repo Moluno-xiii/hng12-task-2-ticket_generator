@@ -2,7 +2,7 @@ import { createContext, PropsWithChildren, useContext, useState } from "react";
 
 interface InitialStateProps {
   activeTab: number;
-  onNextTab: () => void;
+  onNextTab: (number?: number) => void;
   onPreviousTab: (number?: number) => void;
 }
 
@@ -16,10 +16,13 @@ const TabContext = createContext(initialState);
 const TabContextProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [activeTab, setActiveTab] = useState(1);
 
-  const onNextTab = () => {
-    setActiveTab((activeTab) =>
-      activeTab > 2 ? activeTab - 2 : activeTab + 1,
-    );
+  const onNextTab = (number = 0) => {
+    if (number > 0) setActiveTab(number);
+    else {
+      setActiveTab((activeTab) =>
+        activeTab > 2 ? activeTab - 2 : activeTab + 1,
+      );
+    }
   };
 
   const onPreviousTab = (number = 0) => {
