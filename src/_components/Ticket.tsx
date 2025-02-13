@@ -37,48 +37,60 @@ const TechemberTicket = () => {
                 </div>
               </div>
 
-              <div className="flex flex-row items-center justify-center rounded-lg p-2">
+              <div className="2 flex flex-row items-center justify-center">
                 <img
                   aria-labelledby="user image"
                   src={(imageUrl as string) || stateObj.imageUrl}
                   alt="user image"
-                  className="size-[140px]"
+                  className="size-[140px] rounded-2xl border-4 border-[#24a0b5] border-b-[#24a0b5]/50"
                 />
               </div>
 
               <div className="bg-secondary flex flex-col gap-0 rounded-xl p-2 max-md:text-xs">
                 <div className="grid grid-cols-2">
-                  <div className="border-border border-r border-b p-2 text-wrap">
+                  <div className="border-border border-r border-b p-2 text-center text-wrap">
                     <span className="text-[#fff]">Enter your name:</span>
                     <p
                       aria-labelledby="user's name"
-                      className="font-bold capitalize"
+                      className="text-center font-bold text-white capitalize"
                     >
                       {name || stateObj.name}
                     </p>
                   </div>
                   <div className="border-border border-b p-2">
                     <span className="text-[#fff]">Ticket for:</span>
-                    <p aria-labelledby="user's email" className="h-fit w-full">
+                    <p
+                      aria-labelledby="user's email"
+                      className="h-fit w-full font-bold text-white"
+                    >
                       {email || stateObj.email}
                     </p>
                   </div>
                   <div className="border-border border-r border-b p-2">
                     <span className="text-[#fff]">Ticket Type:</span>
-                    <p className="uppercase" aria-labelledby="ticket type">
+                    <p
+                      className="text-white uppercase"
+                      aria-labelledby="ticket type"
+                    >
                       {ticketType || stateObj.ticketType}
                     </p>
                   </div>
                   <div className="border-border border-b p-2">
                     <span className="text-[#fff]">Ticket for:</span>
-                    <p aria-labelledby="number of tickets" className="">
+                    <p
+                      aria-labelledby="number of tickets"
+                      className="font-bold text-white"
+                    >
                       {quantity || stateObj.quantity}
                     </p>
                   </div>
                 </div>
                 <div className="p-2">
                   <span className="text-[#fff]">Special request?</span>
-                  <p aria-labelledby="user special request">
+                  <p
+                    aria-labelledby="user special request"
+                    className="font-bold text-white"
+                  >
                     {specialRequest || stateObj.specialRequest}
                   </p>
                 </div>
