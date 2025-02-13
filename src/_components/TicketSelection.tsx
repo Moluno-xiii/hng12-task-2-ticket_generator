@@ -4,7 +4,7 @@ import TicketTitle from "./TicketTitle";
 import TicketType from "./TicketType";
 
 const TicketSelection = () => {
-  const { dispatch } = useFormContext();
+  const { dispatch, state } = useFormContext();
   const { onNextTab } = useTabContext();
 
   const options = Array.from({ length: 20 }, (_, index) => index + 1);
@@ -16,7 +16,7 @@ const TicketSelection = () => {
 
       <TicketType />
 
-      <div className="space-y-2">
+      <div className="flex flex-col gap-y-20 md:gap-y-2">
         <div className="mb-4 flex flex-col gap-y-2">
           <label>Number of Tickets</label>
           <select
@@ -28,6 +28,7 @@ const TicketSelection = () => {
                 payload: Number(e.target.value),
               })
             }
+            value={state.quantity}
           >
             {options.map((value) => (
               <option key={value} value={value}>

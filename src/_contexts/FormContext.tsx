@@ -17,20 +17,20 @@ interface InitialStateProps {
   specialRequest: string;
 }
 
-// const getInitialState = (): InitialStateProps => {
-//   const storedState = localStorage.getItem("formData");
-//   if (storedState) return JSON.parse(storedState);
+const getInitialState = (): InitialStateProps => {
+  const storedState = localStorage.getItem("formData");
+  if (storedState) return JSON.parse(storedState);
 
-//   return {
-//     name: "",
-//     email: "",
-//     ticketType: "regular access",
-//     ticketPrice: "free",
-//     quantity: 1,
-//     imageUrl: "",
-//     specialRequest: "",
-//   };
-// };
+  return {
+    name: "",
+    email: "",
+    ticketType: "regular access",
+    ticketPrice: "free",
+    quantity: 1,
+    imageUrl: "",
+    specialRequest: "",
+  };
+};
 
 const initialState: InitialStateProps = {
   name: "",
@@ -118,8 +118,11 @@ const reducer = (state: typeof initialState, action: Actions) => {
 };
 
 const FormContextProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, undefined, getInitialState);
 
+  useEffect(() => {
+    getInitialState();
+  });
   useEffect(() => {
     if (typeof window !== "undefined") {
       localStorage.setItem("formData", JSON.stringify(state));

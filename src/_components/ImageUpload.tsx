@@ -1,22 +1,27 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useRef, ChangeEvent, DragEvent } from "react";
 
 interface ImageUploadProps {
   onImageUpload: (imageUrl: string | File) => void;
+  storedImgUrl?: string;
 }
 
-const ImageUpload: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
+const ImageUpload: React.FC<ImageUploadProps> = ({
+  onImageUpload,
+  storedImgUrl,
+}) => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const uploadImageToCloudinary = async (file: File) => {
+    setIsLoading(true);
     const formData = new FormData();
     formData.append("file", file);
     formData.append("upload_preset", "upload_1");
 
     try {
-      setIsLoading(true);
-      console.log("strting function call");
+      console.log("starting function call");
       const response = await fetch(
         `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/image/upload`,
         {
@@ -47,6 +52,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
   };
 
   const handleClick = () => {
+    console.log("clicked");
     if (inputRef.current) {
       inputRef.current.click();
     }
@@ -75,25 +81,35 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
         ref={inputRef}
         type="file"
         accept="image/*"
+        name="imageUrl"
         className="hidden"
         onChange={handleChange}
         aria-labelledby="image input"
       />
-      {selectedImage ? (
-        isLoading ? (
-          <span>uploading image...</span>
-        ) : (
-          <img
-            src={selectedImage}
-            alt="Selected"
-            className="h-full w-full rounded-4xl object-cover"
-          />
-        )
-      ) : (
-        <div className="flex flex-col items-center space-y-4 p-4 text-center">
-          <img src="cloud-download.svg" alt="cloud icon" />
-          <p className="text-sm">Drag & drop or click to upload</p>
+
+      {isLoading ? (
+        <div className="flex flex-col items-center space-y-4">
+          <span>Uploading image...</span>
         </div>
+      ) : selectedImage ? (
+        <img
+          src={selectedImage}
+          alt="Selected image"
+          className="h-full w-full rounded-4xl object-cover"
+        />
+      ) : storedImgUrl ? (
+        <img
+          src={storedImgUrl}
+          alt="selected image"
+          className="h-full w-full rounded-4xl object-cover"
+        />
+      ) : (
+        <>
+          <div className="flex flex-col items-center space-y-4 p-4 text-center">
+            <img src="cloud-download.svg" alt="cloud icon" />
+            <p className="text-sm">Drag & drop or click to upload</p>
+          </div>
+        </>
       )}
     </div>
   );

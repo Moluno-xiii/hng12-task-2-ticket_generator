@@ -7,3 +7,83 @@
   --font-rage: "Road Rage";
   --font-roboto: "Roboto";
 }
+
+@font-face {
+  font-family: "JejuMyeongjo";
+  src: url("/fonts/JejuMyeongjo-Regular.ttf");
+}
+
+.test {
+  font-family: "JejuMyeongjo";
+}
+
+.shape {
+  /* background: var(--color-secondary); */
+  padding: 20px;
+  border-radius: 16px;
+  color: #ccd6f6;
+  font-family: Arial, sans-serif;
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+}
+
+.shape::before,
+.shape::after {
+  content: "";
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  background: rgb(4, 30, 35);
+  border-radius: 50%;
+}
+
+.shape::before {
+  top: -40px;
+  left: -40px;
+}
+
+.shape::after {
+  top: -40px;
+  right: -40px;
+}
+
+.shape .bottom-left,
+.shape .bottom-right {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  background: rgb(4, 30, 35);
+  border-radius: 50%;
+}
+
+.shape .mid-left,
+.shape .mid-right {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background: rgb(4, 30, 35);
+  border-radius: 50%;
+}
+
+.shape .bottom-left {
+  bottom: -40px;
+  left: -40px;
+}
+
+.shape .bottom-right {
+  bottom: -40px;
+  right: -40px;
+}
+
+.shape .mid-left {
+  top: 78%;
+  left: -40px;
+  transform: translateY(-50%);
+}
+
+.shape .mid-right {
+  top: 78%;
+  right: -40px;
+  transform: translateY(-50%);
+}

@@ -9,8 +9,8 @@ const Ready: React.FC = () => {
       aria-labelledby="booked ticket details"
     >
       <div className="space-y-4">
-        <p className="text-[32px] font-bold">Your Ticket is Booked!</p>
-        <span>
+        <p className="test text-[32px] font-bold">Your Ticket is Booked!</p>
+        <span className="font-roboto">
           Check your email for a copy or you can{" "}
           <span className="font-bold">download</span>
         </span>

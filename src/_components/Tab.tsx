@@ -11,11 +11,15 @@ const Tab: React.FC<Props> = ({ title, children }) => {
   const tabPercentage = (tabNumber / 3) * 100;
   return (
     <div
-      className="border-border bg-secondary/20 mx-auto flex max-w-[700px] flex-col gap-y-5 rounded-4xl border p-4 md:bg-[#041E23] md:p-12"
+      className="border-border mx-auto flex max-w-[700px] flex-col gap-y-5 rounded-4xl border bg-[#041E23] p-4 md:p-12"
       aria-labelledby="ticket selection form"
     >
+      {/* <div
+      className="border-border bg-secondary/20 mx-auto flex max-w-[700px] flex-col gap-y-5 rounded-4xl border p-4 md:bg-[#041E23] md:p-12"
+      aria-labelledby="ticket selection form"
+    > */}
       <div className="flex flex-col gap-y-1">
-        <div className="flex flex-row justify-between">
+        <div className="test flex flex-row justify-between">
           <span
             aria-labelledby="form title"
             className="text-2xl capitalize md:text-[32px]"
