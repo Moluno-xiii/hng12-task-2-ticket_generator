@@ -1,5 +1,4 @@
 import { useFormContext } from "../_contexts/FormContext";
-import "./ticket.css";
 
 const TechemberTicket = () => {
   const {
