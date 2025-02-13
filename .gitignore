@@ -23,3 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 /todo.txt
+/.env
+/src/_components/ticket.css
+/src/_components/Test.tsx

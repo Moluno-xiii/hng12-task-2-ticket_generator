@@ -1,42 +1,40 @@
-// import { useState } from "react";
 import { useTabContext } from "../_contexts/TabContext";
 import ImageUpload from "./ImageUpload";
+import { useFormContext } from "../_contexts/FormContext";
 
 const AttendeeDetails = () => {
+  const {
+    dispatch,
+    state: { imageUrl },
+  } = useFormContext();
   const { onNextTab, onPreviousTab } = useTabContext();
-  // const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
-  // const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   if (event.target.files && event.target.files[0]) {
-  //     const file = event.target.files[0];
-  //     setSelectedImage(file);
-  //   }
-  // };
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const onSubmit = (formData: any) => {
-    // e.preventDefault();
-    console.log("this has been submitted");
-    console.log(formData);
+  const handleImageUpload = (url: string | File) => {
+    dispatch({ type: "UPDATE_IMAGE_URL", payload: url });
+  };
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    const formObject = Object.fromEntries(formData.entries());
+
+    if (imageUrl) {
+      formObject.imageUrl = imageUrl;
+    }
+
+    console.log("Form Data:", formObject);
+    // set the formdata to localstorage
     onNextTab();
   };
+
   return (
     <div className="md:border-border space-y-8 md:rounded-4xl md:border md:bg-[#08252B] md:p-8">
       <form
         aria-labelledby="attendee details form"
         className="flex w-full flex-col gap-y-6"
-        action={onSubmit}
+        onSubmit={onSubmit}
       >
-        {/* <div className="flex flex-col gap-y-2">
-          <label htmlFor="image">Select Image</label>
-          <input
-            type="file"
-            id="image"
-            name="image"
-            accept="image/*"
-            onChange={handleImageChange}
-            className="border-border rounded-md border p-3"
-          />
-        </div> */}
         <div
           className="border-border bg-primary/30 rounded-2xl border p-3"
           aria-labelledby="form image input"
@@ -45,7 +43,7 @@ const AttendeeDetails = () => {
             <label htmlFor="image" className="place-self-start">
               Upload Profile Photo
             </label>
-            <ImageUpload />
+            <ImageUpload onImageUpload={handleImageUpload} />
             <div className="bg-primary absolute top-20 right-4 bottom-10 left-4"></div>
           </div>
         </div>
@@ -59,6 +57,9 @@ const AttendeeDetails = () => {
             id="name"
             name="name"
             aria-labelledby="name input"
+            onChange={(e) =>
+              dispatch({ type: "UPDATE_NAME", payload: e.target.value })
+            }
             className="border-border h-12 rounded-md border px-2"
           />
         </div>
@@ -73,6 +74,9 @@ const AttendeeDetails = () => {
             className="border-border h-12 rounded-md border px-10"
             placeholder="hello@avioflagos.io"
             aria-labelledby="email input"
+            onChange={(e) =>
+              dispatch({ type: "UPDATE_EMAIL", payload: e.target.value })
+            }
           />
           <img
             src="mail-icon.svg"
@@ -87,6 +91,12 @@ const AttendeeDetails = () => {
         >
           <label htmlFor="project">About the project</label>
           <textarea
+            onChange={(e) =>
+              dispatch({
+                type: "UPDATE_SPECIAL_REQUEST",
+                payload: e.target.value,
+              })
+            }
             name="project"
             placeholder="Textarea"
             id="project"

@@ -1,27 +1,15 @@
+import { useFormContext } from "../_contexts/FormContext";
+import "./ticket.css";
+
 const TechemberTicket = () => {
+  const {
+    state: { name, email, ticketType, quantity, specialRequest, imageUrl },
+  } = useFormContext();
   return (
     <div className="flex min-h-screen items-center justify-center p-4">
       <div className="w-full max-w-md space-y-2">
         <div className="relative">
-          <div className="absolute inset-0">
-            <svg
-              width="100%"
-              height="100%"
-              viewBox="0 0 400 600"
-              preserveAspectRatio="none"
-            >
-              <path
-                d="M40,0 L360,0 
-                   L400,40 L400,560 
-                   L360,600 L40,600 
-                   L0,560 L0,40 Z"
-                fill="none"
-                stroke="#24A0B5"
-                strokeWidth="2"
-                className="h-full w-full"
-              />
-            </svg>
-          </div>
+          <div className="absolute inset-0"></div>
 
           <div className="px-7 py-10">
             <div
@@ -49,7 +37,7 @@ const TechemberTicket = () => {
                 <div className="relative aspect-square overflow-hidden rounded-lg">
                   <img
                     aria-labelledby="user image"
-                    src="/user-image.svg"
+                    src={(imageUrl as string) || "/user-image.svg"}
                     alt="user image"
                     className="h-full w-full"
                   />
@@ -60,32 +48,37 @@ const TechemberTicket = () => {
                 <div className="grid grid-cols-2">
                   <div className="border-border border-r border-b p-2">
                     <span className="text-gray-500">Enter your name:</span>
-                    <p aria-labelledby="user's name" className="font-bold">
-                      Avi Chukwu
+                    <p
+                      aria-labelledby="user's name"
+                      className="font-bold capitalize"
+                    >
+                      {name || " Avi Chukwu"}
                     </p>
                   </div>
                   <div className="border-border border-b p-2">
                     <span className="text-gray-500">Ticket for:</span>
                     <p aria-labelledby="user's email" className="font-bold">
-                      User@email.com
+                      {email || "User@email.com"}
                     </p>
                   </div>
                   <div className="border-border border-r border-b p-2">
                     <span className="text-gray-500">Ticket Type:</span>
-                    <p aria-labelledby="ticket type">VIP</p>
+                    <p className="uppercase" aria-labelledby="ticket type">
+                      {ticketType || "VIP"}
+                    </p>
                   </div>
                   <div className="border-border border-b p-2">
                     <span className="text-gray-500">Ticket for:</span>
                     <p aria-labelledby="number of tickets" className="">
-                      1
+                      {quantity || "1"}
                     </p>
                   </div>
                 </div>
                 <div className="p-2">
                   <span className="text-gray-500">Special request?</span>
                   <p aria-labelledby="user special request">
-                    Nil? Or the users sad story they write in there gets this
-                    whole space, Max of three rows.
+                    {specialRequest ||
+                      " Nil? Or the users sad story they write in there gets this whole space, Max of three rows."}
                   </p>
                 </div>
               </div>
@@ -102,7 +95,7 @@ const TechemberTicket = () => {
               preserveAspectRatio="none"
             >
               <path
-                d="M40,0 C40,0 80,0 120,0 
+                d="M40,0 C40,0 80,0 120,0
                    C360,0 360,0 360,0
                    C360,0 400,40 400,40
                    L400,110 C400,110 360,150 360,150

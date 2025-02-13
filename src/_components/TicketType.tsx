@@ -1,14 +1,15 @@
-import { useState } from "react";
+import { useFormContext } from "../_contexts/FormContext";
 
 interface TicketTypes {
   name: string;
-  amount?: number;
+  amount: number | string;
   capacity: number;
 }
 
 const ticketTypes: TicketTypes[] = [
   {
     name: "regular access",
+    amount: "free",
     capacity: 20,
   },
   {
@@ -24,11 +25,19 @@ const ticketTypes: TicketTypes[] = [
 ];
 
 const TicketType: React.FC = () => {
-  const [selectedTicket, setSelectedTicket] = useState("regular access");
+  const {
+    dispatch,
+    state: { ticketType },
+  } = useFormContext();
 
-  const handleSelectTicket = (ticketName: string) => {
-    setSelectedTicket(ticketName);
+  const handleTicketData = (
+    ticketPrice: string | number,
+    ticketType: string,
+  ) => {
+    dispatch({ type: "TICKET_PRICE", payload: ticketPrice });
+    dispatch({ type: "TICKET_TYPE", payload: ticketType });
   };
+
   return (
     <div
       aria-labelledby="event ticket type"
@@ -39,14 +48,14 @@ const TicketType: React.FC = () => {
         {ticketTypes.map((ticket) => (
           <li
             key={ticket.name}
-            className={`border-border flex cursor-pointer flex-col justify-between gap-x-2 rounded-xl border p-2 transition-all duration-200 hover:bg-[#197686] ${ticket.name === selectedTicket && "bg-[#197686]"}`}
-            onClick={() => handleSelectTicket(ticket.name)}
+            className={`border-border flex cursor-pointer flex-col justify-between gap-x-2 rounded-xl border p-2 transition-all duration-200 hover:bg-[#197686] ${ticket.name === ticketType && "bg-[#197686]"}`}
+            onClick={() => handleTicketData(ticket.amount, ticket.name)}
           >
             <button
               aria-labelledby={"ticket amount"}
               className={`h-[38px] text-start text-xl font-semibold`}
             >
-              {`${ticket.amount ? "$" + ticket.amount : "Free"}`}
+              {`${typeof ticket.amount === "string" ? "Free" : "$" + ticket.amount}`}
             </button>
             <div className="flex flex-col gap-y-2">
               <span aria-labelledby="ticket name" className="uppercase">

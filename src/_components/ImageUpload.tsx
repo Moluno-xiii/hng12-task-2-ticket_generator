@@ -1,14 +1,48 @@
 import { useState, useRef, ChangeEvent, DragEvent } from "react";
 
-const ImageUpload = () => {
+interface ImageUploadProps {
+  onImageUpload: (imageUrl: string | File) => void;
+}
+
+const ImageUpload: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const uploadImageToCloudinary = async (file: File) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "upload_1");
+
+    try {
+      setIsLoading(true);
+      console.log("strting function call");
+      const response = await fetch(
+        `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/image/upload`,
+        {
+          method: "POST",
+          body: formData,
+        },
+      );
+
+      const data = await response.json();
+      if (data.secure_url) {
+        setSelectedImage(data.secure_url);
+        onImageUpload(data.secure_url);
+      }
+      console.log(data);
+    } catch (error) {
+      console.error("Error uploading image:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const file = e.target.files?.[0];
     if (file) {
-      setSelectedImage(URL.createObjectURL(file));
+      uploadImageToCloudinary(file);
     }
   };
 
@@ -26,7 +60,7 @@ const ImageUpload = () => {
     e.preventDefault();
     const file = e.dataTransfer.files?.[0];
     if (file) {
-      setSelectedImage(URL.createObjectURL(file));
+      uploadImageToCloudinary(file);
     }
   };
 
@@ -46,11 +80,15 @@ const ImageUpload = () => {
         aria-labelledby="image input"
       />
       {selectedImage ? (
-        <img
-          src={selectedImage}
-          alt="Selected"
-          className="h-full w-full object-cover"
-        />
+        isLoading ? (
+          <span>uploading image...</span>
+        ) : (
+          <img
+            src={selectedImage}
+            alt="Selected"
+            className="h-full w-full rounded-4xl object-cover"
+          />
+        )
       ) : (
         <div className="flex flex-col items-center space-y-4 p-4 text-center">
           <img src="cloud-download.svg" alt="cloud icon" />

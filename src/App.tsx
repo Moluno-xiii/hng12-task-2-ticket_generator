@@ -36,7 +36,9 @@ function App() {
       {tabs.map(
         (tab) =>
           activeTab === tab.number && (
-            <Tab title={tab.title}>{tab.element}</Tab>
+            <Tab key={tab.number} title={tab.title}>
+              {tab.element}
+            </Tab>
           ),
       )}
     </div>
